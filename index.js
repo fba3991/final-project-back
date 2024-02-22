@@ -13,7 +13,7 @@ const app = express();
 
 
 app.use(cors({
-  origin: ['http://localhost:5173', 'https://final-project-front-teal.vercel.app'],
+  origin: ['http://localhost:5173', 'https://final-project-front-gray.vercel.app'],
   credentials: true
 }));
 
