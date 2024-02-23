@@ -24,8 +24,8 @@ const playerSchema = new Schema({
     max: () => {
       // Restituisce la data massima di 15 anni fa
       const now = dayjs();
-      const fourteenYearsAgo = now.subtract(15, "years");
-      return fourteenYearsAgo.format("YYYY-MM-DD");
+      const fifteenYearsAgo = now.subtract(15, "years");
+      return fifteenYearsAgo.format("YYYY-MM-DD");
     },
   },
   nazionalita: {
