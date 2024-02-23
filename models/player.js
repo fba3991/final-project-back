@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+import dayjs from "dayjs";
 
 const { Schema, model } = mongoose;
 
@@ -7,68 +7,73 @@ const playerSchema = new Schema({
   nome: {
     type: String,
     required: true,
-    
+    minLength: 1,
+    maxLength: 20,
+    trim: true,
   },
   cognome: {
     type: String,
-    required: true
+    required: true,
+    minLength: 1,
+    maxLength: 30,
+    trim: true,
   },
   dataNascita: {
     type: Date,
     required: true,
-    
+    max: () => {
+      // Restituisce la data massima di 15 anni fa
+      const now = dayjs();
+      const fourteenYearsAgo = now.subtract(15, "years");
+      return fourteenYearsAgo.format("YYYY-MM-DD");
+    },
   },
   nazionalita: {
     type: String,
     required: true,
-
+    minLength: 1,
+    maxLength: 20,
+    trim: true,
   },
   posizione: {
     type: String,
-    required: true
+    required: true,
   },
   gol: {
     type: Number,
     default: 0,
-    required:true
+    required: true,
   },
   golSubiti: {
     type: Number,
     default: 0,
-    required:true
+    required: true,
   },
   assist: {
     type: Number,
     default: 0,
-    required:true
+    required: true,
   },
-  ammonizioni:{
-    type:Number,
-    default:0,
-    required:true
+  ammonizioni: {
+    type: Number,
+    default: 0,
+    required: true,
   },
-  espulsioni:{
-    type:Number,
-    default:0,
-    required:true
+  espulsioni: {
+    type: Number,
+    default: 0,
+    required: true,
   },
 
   partiteGiocate: {
     type: Number,
     default: 0,
-    required:true
+    required: true,
   },
- 
-  immagine: {
-    type: String,
-    default: ' image/GettyImages-1342834182-1637413265607-1200x675.jpg'
-  },
- 
- 
- 
 
+  
 });
-
-const Player = model('Player', playerSchema);
+// Creazione del modello Player basato sullo schema definito
+const Player = model("Player", playerSchema);
 
 export default Player;

@@ -5,16 +5,17 @@ import playersRouter from "./routes/player.js";
 import mongoose from "mongoose";
 import cors from "cors"
 
+// variabile d'a,biente
 dotenv.config();
 
 const { EXPRESS_PORT, MONGO_URI } = process.env;
 
 const app = express();
 
-
+// cors per permettere al front di funzionare
 app.use(cors({
   origin: ['http://localhost:5173', 'https://final-project-front-gray.vercel.app'],
-  credentials: true
+  credentials: true // abilitazione delle credenziali
 }));
 
 
