@@ -14,8 +14,8 @@ const app = express();
 
 // cors per permettere al front di funzionare
 app.use(cors({
-  origin:[ " http://localhost:5174/ ", 
-  "https://final-project-front-plum.vercel.app/ "],
+  origin:" http://localhost:5174 ", 
+  
 
   credentials: true // abilitazione delle credenziali
 }));
