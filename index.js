@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import morgan from "morgan";
 import playersRouter from "./routes/player.js";
 import mongoose from "mongoose";
-import cors from "cors"
+import cors from "cors";
 
 // variabile d'a,biente
 dotenv.config();
@@ -15,14 +15,11 @@ const app = express();
 // cors per permettere al front di funzionare
 app.use(cors({
   origin: [
-    " http://localhost:5173 ",  "https://final-project-front-mu.vercel.app ",
+    "http://localhost:5173",
+    "https://final-project-front-mu.vercel.app",
   ],
- 
-  
-
-  credentials: true // abilitazione delle credenziali
+  credentials: true
 }));
-
 
 app.use(morgan('dev'));
 app.use(express.json());
