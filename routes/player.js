@@ -50,21 +50,28 @@ router.post('/', async (req, res) => {
 
 // Rotta per l'aggiornamento di un giocatore esistente
 router.put('/:id', async (req, res) => {
-    try {
-      const playerToUpdate = req.body;
-        // Trova e aggiorna il giocatore con l'ID specifico
-      const updatedPlayer = await Player.findByIdAndUpdate(req.params.id, playerToUpdate, { new: true });
-  
-      if (!updatedPlayer) {
-        return res.status(404).send('Giocatore non trovato'); // errore se il giocatore non viene trovato
+  try {
+    const playerToUpdate = req.body;
+    
+    // Trova e aggiorna il giocatore con l'ID specifico
+    const updatedPlayer = await Player.findByIdAndUpdate(
+      req.params.id, 
+      playerToUpdate, 
+      { 
+        new: true, // Restituisci il documento aggiornato invece di quello originale
+        runValidators: true // Attiva la validazione dei dati del modello durante l'aggiornamento
       }
-  
-      res.send(updatedPlayer);//giocatore aggiornato
-    } catch (err) {
-      res.status(500).send(err.message);
-    }
-  });
+    );
 
+    if (!updatedPlayer) {
+      return res.status(404).send('Giocatore non trovato'); // errore se il giocatore non viene trovato
+    }
+
+    res.send(updatedPlayer); // Restituisci il giocatore aggiornato con successo
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+});
 // Rotta per l'eliminazione di un giocatore
 
 router.delete('/:id', async (req, res) => {
