@@ -14,8 +14,10 @@ const app = express();
 
 // cors per permettere al front di funzionare
 app.use(cors({
-  origin: 
-  " http://localhost:5173 ", 
+  origin: [
+    " http://localhost:5173 ",  "https://final-project-front-mu.vercel.app ",
+  ],
+ 
   
 
   credentials: true // abilitazione delle credenziali
