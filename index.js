@@ -25,18 +25,20 @@ app.use(express.json());
 app.use('/api/player', playerRoutes);
 app.use('/api/squadra', squadraRoutes);
 
-// Connessione al database MongoDB locale
-mongoose.connect(config.MONGO_URI)
-  .then(() => {
-    console.log(`Connected to MongoDB at ${config.MONGO_URI}`);
-  })
-  .catch((error) => {
-    console.error('Error connecting to MongoDB:', error);
-  });
+// Connessione al database MongoDB
+if (process.env.MONGODB_URI) {
+  mongoose.connect(process.env.MONGODB_URI)
+    .then(() => {
+      console.log(`Connected to MongoDB`);
+    })
+    .catch((error) => {
+      console.error('Error connecting to MongoDB:', error);
+    });
+} else {
+  console.log('MONGODB_URI not configured, skipping database connection');
+}
 
-// Avvio server
-app.listen(config.PORT, () => {
-  console.log(`Server started on port ${config.PORT}`);
-});
+// Per Vercel, esportiamo l'app invece di fare listen
+export default app;
 
 
